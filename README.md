@@ -8,10 +8,7 @@ Below is a simple ToDo application that we would like to you build, Following ar
 
 1. As a user, I should be able to view a page with a task list on it.
 2. As a user, I should be able to add a new task to the task list.
-3. As a user, I should be able to remove a task from the task list.
-4. As a user, I should be able to reorder a task in the task list.
-5. As a user, I should be able to edit the name of a task in the task list.
-6. As a user, I should be able to mark a task in the list as completed.
+3. As a user, I should be able to mark a task in the list as completed.
 
 This is single user application and do not worry about cross-user scenarios or security in that respect.
 
@@ -25,9 +22,12 @@ A task is simply defined as a small piece of work with a description and can exi
 
 ### Architecture
 
-1. Implement the project with ASP.NET MVC. Please use JavaScript/Jquery if required on the front end. 
-2. Implement back end with ASP.NET Web API which would be the Service layer and data access with SQL Express.
-3. Make sure you write unit tests for the code using MOQ for .NET.
+1. Implement the project with ASP.NET MVC. 
+2. Implement back end with ASP.NET Web API which would be the Service layer. Persist data however you want.
+
+### OPTIONAL
+1. Please use JavaScript/Jquery if required on the front end. 
+2. Make sure you write unit tests for the code using MOQ for .NET.
 
 
 Please email questions to: code@credomobile.com.
