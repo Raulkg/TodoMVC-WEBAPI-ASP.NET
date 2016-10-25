@@ -10,7 +10,7 @@ namespace TodoApp.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Todo Application";
 
             return View();
         }
