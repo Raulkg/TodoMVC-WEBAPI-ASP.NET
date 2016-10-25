@@ -19,7 +19,8 @@ namespace TodoApp.Controllers
         { 
             new Todoitem { Key= "1", Name = "Tomato Soup", IsComplete = false }, 
             new Todoitem { Key= "2", Name = "Yo-yo", IsComplete =true}, 
-            new Todoitem {Key ="3", Name = "Hammer", IsComplete = false} 
+            new Todoitem {Key ="3", Name = "Hammer", IsComplete = false} ,
+              new Todoitem {Key ="4", Name = "eat", IsComplete = false} 
         };
 
         public IEnumerable<Todoitem> GetAll()
