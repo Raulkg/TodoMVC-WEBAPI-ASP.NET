@@ -143,6 +143,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyDBModel.cs">
+      <DependentUpon>MyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tododriver.cs" />
     <Compile Include="Models\Todoitem.cs" />
     <Compile Include="Models\TodoRepo.cs" />
@@ -173,6 +191,23 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <EntityDeploy Include="Models\MyDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MyDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MyDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyDB.edmx</DependentUpon>
+      <LastGenOutput>MyDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MyDB.edmx.diagram">
+      <DependentUpon>MyDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\MyDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyDB.edmx</DependentUpon>
+      <LastGenOutput>MyDB.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

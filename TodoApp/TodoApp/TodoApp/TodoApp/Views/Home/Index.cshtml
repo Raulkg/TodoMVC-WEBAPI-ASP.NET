@@ -20,7 +20,7 @@
             <div class="todolist">
                 <h1>Already Done</h1>
                 <ul id="done-items" class="list-unstyled">
-                    <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                  
 
                 </ul>
             </div>
@@ -39,15 +39,23 @@
                 // On success, 'data' contains a list of products.
                 
                 $.each(data, function (key, item) {
-                    $('#todo ul#sortable').append('                    <li class="ui-state-default"> ' +
-                      '    <div class="checkbox"> ' +
-                           '   <label>' +
-                                '  <input type="checkbox" value="" />'  + item.Name+
-                             ' </label>' +
-                        '  </div>' +
-                     ' </li>');
-                });
 
+                    if (item.isComplete == false) {
+                        var done = item.Name;
+                        var markup = '<li id="' + item.id + '"  >' + done + '<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
+                        $('#done-items').append(markup);
+
+                    }
+                    else  
+                        $('#todo ul#sortable').append('                    <li id="'+item.id+'" class="ui-state-default"> ' +
+                          '    <div class="checkbox"> ' +
+                               '   <label>' +
+                                    '  <input type="checkbox" value="" />'  + item.Name+
+                                 ' </label>' +
+                            '  </div>' +
+                         ' </li>');
+                    });
+                
                 countTodos();
             });
     });
@@ -92,8 +100,10 @@
     $('.todolist').on('change', '#sortable li input[type="checkbox"]', function () {
         if ($(this).prop('checked')) {
             var doneItem = $(this).parent().parent().find('label').text();
+            var getID = $(this).parent().parent().parent().attr('id');
             $(this).parent().parent().parent().addClass('remove');
             done(doneItem);
+            mymove(getID,doneItem);
             countTodos();
         }
     });
@@ -102,6 +112,20 @@
     //delete done task from "already done"
     $('.todolist').on('click', '.remove-item', function () {
         removeItem(this);
+
+
+        $.ajax({
+            url: uri + '/' + $(this).parent().attr('id'),
+            type: 'DELETE',
+            success: function (result) {
+                console.log("succesfull");
+            }
+        });
+
+
+
+
+
     });
 
     // count tasks
@@ -112,9 +136,22 @@
 
     //create task
     function createTodo(text) {
-        var markup = '<li class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" />' + text + '</label></div></li>';
+     
+       
+        var IDs = [];
+        $("#sortable").find("li").each(function () { IDs.push(this.id); });
+        $("#done-items").find("li").each(function () { IDs.push(this.id); });
+        var count = Math.max.apply(Math, IDs) + 1;
+
+      
+        var markup = '<li  id ="'+count+'"class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" />' + text + '</label></div></li>';
         $('#sortable').append(markup);
         $('.add-todo').val('');
+     
+        $.post(uri + '/', { "id": count, "Key": "1", "Name": text, "isComplete": "true" });
+       
+
+
     }
 
     //mark task as done
@@ -123,7 +160,20 @@
         var markup = '<li>' + done + '<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
         $('#done-items').append(markup);
         $('.remove').remove();
+
+     
+
+
     }
+
+
+    function mymove(getID,name) {
+
+        $.post(uri + '/' + getID, { "id": getID, "Key": "1", "Name": name, "isComplete": "false" });
+
+    }
+
+
 
     //mark all tasks as done
     function AllDone() {
